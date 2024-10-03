@@ -311,13 +311,15 @@ if [ -n "$prompt" ]; then
 # if input file_descriptor is a terminal, run on chat mode
 elif [ -t 0 ]; then
 	echo -e "Welcome to chatgpt. You can quit with '\033[36mexit\033[0m' or '\033[36mq\033[0m'."
+	echo "Model: $MODEL"
+	echo "Temperature: $TEMPERATURE"
+	echo "Context: $CONTEXT"
 # prompt from pipe or redirected stdin, run on pipe mode
 else
 	pipe_mode_prompt+=$(cat -)
 fi
 
 while $running; do
-
 	if [ -z "$pipe_mode_prompt" ]; then
 		if [ $MULTI_LINE_PROMPT = true ]; then
 			echo -e "\nEnter a prompt: (Press Enter then Ctrl-D to send)"
